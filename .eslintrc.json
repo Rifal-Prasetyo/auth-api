@@ -8,6 +8,9 @@
         "extends": ["airbnb-base"],
         "parserOptions": {
           "sourceType": "commonjs"
+        },
+        "rules": {
+          "no-underscore-dangle": "off"
         }
       },
       {
