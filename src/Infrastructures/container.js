@@ -3,6 +3,7 @@ const { createContainer } = require('instances-container');
 // external agency
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
+const Jwt = require('@hapi/jwt');
 const pool = require('./database/postgres/pool');
 
 // service (repository, helper, manager, etc)
@@ -13,6 +14,10 @@ const BcryptPasswordHash = require('./security/BcryptPasswordHash');
 const AddUserUseCase = require('../Applications/use_case/AddUserUseCase');
 const UserRepository = require('../Domains/users/UserRepository');
 const PasswordHash = require('../Applications/security/PasswordHash');
+const AuthenticationRepository = require('../Domains/authentications/AuthenticationRepository');
+const AuthenticationRepositoryPostgres = require('./repository/AuthenticationRepositoryPostgres');
+const AuthenticationTokenManager = require('../Applications/security/AuthenticationTokenManager');
+const JwtTokenManager = require('./security/JwtTokenManager');
 
 // creating container
 const container = createContainer();
@@ -34,12 +39,34 @@ container.register([
     },
   },
   {
+    key: AuthenticationRepository.name,
+    Class: AuthenticationRepositoryPostgres,
+    parameter: {
+      dependencies: [
+        {
+          concrete: pool,
+        },
+      ],
+    },
+  },
+  {
     key: PasswordHash.name,
     Class: BcryptPasswordHash,
     parameter: {
       dependencies: [
         {
           concrete: bcrypt,
+        },
+      ],
+    },
+  },
+  {
+    key: AuthenticationTokenManager.name,
+    Class: JwtTokenManager,
+    parameter: {
+      dependencies: [
+        {
+          concrete: Jwt,
         },
       ],
     },
