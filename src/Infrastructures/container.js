@@ -79,7 +79,6 @@ container.register([
 // registering use cases
 container.register([
   {
-    key: AddUserUseCase.name,
     Class: AddUserUseCase,
     parameter: {
       injectType: 'destructuring',
@@ -96,7 +95,6 @@ container.register([
     },
   },
   {
-    key: LoginUserUseCase.name,
     Class: LoginUserUseCase,
     parameter: {
       injectType: 'destructuring',
@@ -121,7 +119,6 @@ container.register([
     },
   },
   {
-    key: RefreshAuthenticationUseCase.name,
     Class: RefreshAuthenticationUseCase,
     parameter: {
       injectType: 'destructuring',
@@ -138,7 +135,6 @@ container.register([
     },
   },
   {
-    key: DeleteAuthenticationUseCase.name,
     Class: DeleteAuthenticationUseCase,
     parameter: {
       injectType: 'destructuring',

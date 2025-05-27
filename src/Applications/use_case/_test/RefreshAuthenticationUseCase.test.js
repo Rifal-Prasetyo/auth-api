@@ -35,11 +35,11 @@ describe('RefreshAuthenticationUseCase', () => {
 
     // Assert
     expect(mockAuthenticationRepository.verifyRefreshToken)
-      .toHaveBeenCalled(refreshToken);
+      .toHaveBeenCalledWith(refreshToken);
     expect(mockAuthenticationTokenManager.verifyRefreshToken)
-      .toHaveBeenCalled(refreshToken);
+      .toHaveBeenCalledWith(refreshToken);
     expect(mockAuthenticationTokenManager.generateAccessToken)
-      .toHaveBeenCalled({ id: 'user-123' });
+      .toHaveBeenCalledWith({ id: 'user-123' });
     expect(accessToken).toStrictEqual('access_token');
   });
 });

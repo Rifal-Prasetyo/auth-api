@@ -1,5 +1,6 @@
 const Hapi = require('@hapi/hapi');
 const users = require('../../Interfaces/http/api/users');
+const authentication = require('../../Interfaces/http/api/authentications');
 const config = require('../../Common/config');
 
 const createServer = async (container) => {
@@ -12,6 +13,10 @@ const createServer = async (container) => {
   await server.register([
     {
       plugin: users,
+      options: { container },
+    },
+    {
+      plugin: authentication,
       options: { container },
     },
   ]);
