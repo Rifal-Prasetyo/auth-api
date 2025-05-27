@@ -57,14 +57,14 @@ describe('LoginUserUseCase', () => {
     expect(authenticated)
       .toStrictEqual(expectedNewAuthentication);
     expect(mockUserRepository.getPasswordByUsername)
-      .toHaveBeenCalled(username);
+      .toHaveBeenCalledWith(username);
     expect(mockPasswordHash.compare)
-      .toHaveBeenCalled(password, 'encrypted_password');
+      .toHaveBeenCalledWith(password, 'encrypted_password');
     expect(mockAuthenticationTokenManager.generateAccessToken)
-      .toHaveBeenCalled({ id: 'user-123' });
+      .toHaveBeenCalledWith({ id: 'user-123' });
     expect(mockAuthenticationTokenManager.generateRefreshToken)
-      .toHaveBeenCalled({ id: 'user-123' });
+      .toHaveBeenCalledWith({ id: 'user-123' });
     expect(mockAuthenticationRepository.addRefreshToken)
-      .toHaveBeenCalled(expectedNewAuthentication.refreshToken);
+      .toHaveBeenCalledWith(expectedNewAuthentication.refreshToken);
   });
 });
