@@ -37,6 +37,21 @@ describe('HTTP server', () => {
       expect(responseJson.data.addedUser).toBeDefined();
     });
   });
+  describe('when GET /', () => {
+    it('should return 200 and hello world', async () => {
+      // Arrange
+      const server = await createServer({});
+      // Action
+      const response = await server.inject({
+        method: 'GET',
+        url: '/',
+      });
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.value).toEqual('Hello world!');
+    });
+  });
   it('should response 400 when request payload not contain needed property', async () => {
     // Arrange
     const requestPayload = {
